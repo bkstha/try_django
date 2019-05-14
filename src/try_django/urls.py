@@ -18,7 +18,10 @@ from django.urls import path, re_path
 
 from blog.views import (
     blog_post_detail_page,
-    blog_list_page
+    blog_post_list_view,
+    blog_post_create_view,
+    blog_post_update_view,
+    blog_post_delete_view,
 )
 
 from .views import (
@@ -34,8 +37,11 @@ urlpatterns = [
     path('about/', about_page),
     path('contact/', contact_page),
     path('example/', example_page),
-    path('blogs/<int:id>/', blog_post_detail_page),
-    path('blogs', blog_list_page),
-    # re_path(r'^blog/(?P<post_id>\d+)/$', blog_post_detail_page)
+    path('blogs/<str:slug>/', blog_post_detail_page),
+    path('blogs/<str:slug>/edit/', blog_post_update_view),
+    path('blogs/<str:slug>/delete/', blog_post_delete_view),
+    path('blogs', blog_post_list_view),
+    path('blogs-create/', blog_post_create_view),
+    re_path(r'^blog-regex/(?P<id>\d+)/$', blog_post_detail_page)
 
 ]
